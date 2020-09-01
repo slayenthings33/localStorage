@@ -1,0 +1,11 @@
+#contentContainer {
+    width: 350px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px dotted red;
+}
+#uploadSection {
+    border: red dotted 1px;
+}
