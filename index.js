@@ -14,45 +14,60 @@ removeButton.addEventListener("click", removeItem);
 clearButton.addEventListener("click", clearLocal)
 uploadButton.addEventListener("click", () => {
     upload();     
-    displayInput();
-    console.log("event listener"); 
+    // console.log("event listener"); 
 });
 
 
 /*************FUNCTIONS**************/
 
+let array = [];
+displayInput();
+
 function removeItem() {
     let toDelete = document.getElementById("removeInput").value;
     localStorage.removeItem(toDelete);
-    // console.log("function: removeItem");
-}
+    console.log("function: removeItem");
+};
+
+function displayInput() {
+    let fullName = localStorage.getItem("fullNameInput");
+    // let email = localStorage.getItem("email");
+    // let phoneNumber  = localStorage.getItem("phone");
+    // let parsedInfo = JSON.parse(localStorage.getItem(localStorage));
+    // console.log(parsedInfo);
+    let fullNameInput=document.getElementById("fullName").value;
+    let parsedData=JSON.parse(localStorage.getItem(fullNameInput))
+    
+    if(parsedData!=null){
+    let userInfo=`<p>Name: ${parsedData[0]} Email: ${parsedData[1]} Phone: ${parsedData[2]}</p>`
+    uploadSection.innerHTML += userInfo;}
+
+
+//     let userInfo = `
+//     <p>${JSON.parse(localStorage.getItem("fullNameInput"))}</p>
+//     `;
+
+    // console.log(array);
+    // console.log("function: displayInput")
+};
 
 function upload() {
+    array = [];
     console.log("function: upload")
     let fullNameInput = document.getElementById("fullName").value;
     let emailInput = document.getElementById("email").value;
     let phoneInput = document.getElementById("phoneNumber").value;
-
-    localStorage.setItem("fullName", fullNameInput);
-    localStorage.setItem("email", emailInput);
-    localStorage.setItem("phone", phoneInput);    
+    array.push(fullNameInput, emailInput, phoneInput);
+    console.log(array);
+    localStorage.setItem(fullNameInput,JSON.stringify(array));
+    displayInput();
+    // localStorage.setItem("email", emailInput);
+    // localStorage.setItem("phone", phoneInput);  
 };
 
-function displayInput() {
-    let fullName = localStorage.getItem("fullName");
-    let email = localStorage.getItem("email");
-    let phoneNumber  = localStorage.getItem("phone");
-    let info = `
-    <li>${fullName}</li>
-    <li>${email}</li>
-    <li>${phoneNumber}</li>
-    `;
-    uploadSection.innerHTML += info;
-    // console.log("function: displayInput")
-};
-
-    function clearLocal() {
+function clearLocal() {
     localStorage.clear();
     uploadSection.innerHTML = "";
-    // console.log("function: clearLocal");
-    };
+    console.log("function: clearLocal");
+};
+
