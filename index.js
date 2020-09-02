@@ -27,9 +27,11 @@ function removeItem() {
     let toDelete = document.getElementById("removeInput").value;
     localStorage.removeItem(toDelete);
     console.log("function: removeItem");
+    uploadSection -= toDelete;
 };
 
 function displayInput() {
+    let form = document.getElementById("form");
     let fullName = localStorage.getItem("fullNameInput");
     // let email = localStorage.getItem("email");
     // let phoneNumber  = localStorage.getItem("phone");
@@ -39,8 +41,10 @@ function displayInput() {
     let parsedData=JSON.parse(localStorage.getItem(fullNameInput))
     
     if(parsedData!=null){
-    let userInfo=`<p>Name: ${parsedData[0]} Email: ${parsedData[1]} Phone: ${parsedData[2]}</p>`
-    uploadSection.innerHTML += userInfo;}
+        let userInfo=`<p><b>Name:</b> ${parsedData[0]} <b>Email:</b> ${parsedData[1]} <b>Phone:</b> ${parsedData[2]}</p>`
+    uploadSection.innerHTML += userInfo;
+    form.reset();
+}
 
 
 //     let userInfo = `
